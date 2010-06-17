@@ -8,8 +8,12 @@
 		$count++;
 	endforeach; 
 	?]
-
-	<div id="sf_admin_form_tab_menu">
+        <?php   if( $this->configuration->getValue('show.tab') == 'horizontal' )
+                    echo '<div id="sf_admin_form_tab_menu_h">';
+                else
+                    echo '<div id="sf_admin_form_tab_menu_v">';   
+        ?>
+                
 		[?php if ($count > 1): ?]
 		<ul>
     [?php foreach ($configuration->getFormFields($form,'show') as $fieldset => $fields): ?]

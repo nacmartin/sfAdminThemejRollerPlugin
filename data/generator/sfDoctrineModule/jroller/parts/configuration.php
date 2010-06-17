@@ -10,9 +10,9 @@
  */
 class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorConfiguration extends sfModelGeneratorConfiguration
 {
+<?php include dirname(__FILE__).'/jrollerConfiguration.php' ?>
 <?php include dirname(__FILE__).'/actionsConfiguration.php' ?>
-
-<?php include dirname(__FILE__).'/fieldsConfiguration.php' ?>
+<?php include dirname(__FILE__).'/fieldsConfiguration.php'  ?>
 
   /**
    * Gets the form class name.
@@ -51,7 +51,6 @@ class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorConfiguration ex
 <?php //endif; ?>
 
 <?php include dirname(__FILE__).'/filtersConfiguration.php' ?>
-
 <?php include dirname(__FILE__).'/paginationConfiguration.php' ?>
 
 <?php include dirname(__FILE__).'/sortingConfiguration.php' ?>

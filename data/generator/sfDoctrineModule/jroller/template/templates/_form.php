@@ -25,7 +25,12 @@
 		?]
 
 
-        <div id="sf_admin_form_tab_menu">
+            <?php   if( $this->configuration->getValue('edit.tab') == 'horizontal' )
+                        echo '<div id="sf_admin_form_tab_menu_h">';
+                    else
+                        echo '<div id="sf_admin_form_tab_menu_v">';
+            ?>
+
 			[?php if ($count > 1): ?]
 			<ul>
 	    [?php foreach ($configuration->getFormFields($form, $form->isNew() ? 'new' : 'edit') as $fieldset => $fields): ?]
