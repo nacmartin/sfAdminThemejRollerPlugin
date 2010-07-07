@@ -59,5 +59,6 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 
 <?php include dirname(__FILE__).'/../../parts/showAction.php' ?>
 
+<?php include dirname(__FILE__).'/../../parts/editableAction.php' ?>
 
 }

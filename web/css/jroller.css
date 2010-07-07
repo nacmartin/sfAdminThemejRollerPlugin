@@ -165,3 +165,85 @@ html { overflow: -moz-scrollbars-vertical !important; }
 
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
 .ui-tabs-vertical .ui-tabs-panel { float: left; width: 70%; padding: 1em 1%; margin: 0 0 0 2%; }
+
+
+/* Field Editable */
+
+.editable {
+    display: inline-block;
+}
+
+.sf-admin-editable-field-toolbar {
+    display: inline-block;
+    float: right;
+}
+
+.sf-admin-editable-field-toolbar a{
+    display: block;
+    width: 17px;
+    height: 15px;
+    float: right;
+    margin: 2px;
+}
+
+div.editable {
+    height: 100%;
+    width: 100%
+    padding-right: 25px;
+}
+
+.dropdownCell{
+    border : 1px solid #bbb;
+    width: 150px;
+    height: 23px;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 10pt;
+    max-height: 23px;
+    background: transparent url('arrow.gif') right top no-repeat;
+}
+
+.dropdownCell img{
+    margin : 0px 3px 0px 3px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.dropdownPanel{
+    border : 1px solid #bbb;
+    min-width: 150px;
+    max-height: 250px;
+    overflow: auto;
+    position: absolute;
+    z-index: 10;
+}
+
+.dropdownItem{
+    background-color: #fff;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 10pt;
+    padding-left: 4px;
+}
+
+.dropdownItem img{
+    margin : 0px 3px 0px 3px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.dropdownItemSelected{
+    background-color: #ccc;
+}
+
+.dropdownLabel{
+    background-color: #eee;
+    font-style: italic;
+}
+
+div#dgpopup {
+   background-color:#FFFFFF;
+   border:2px solid #CCCCCC;
+   font-size:16px;
+   padding:3px;
+}

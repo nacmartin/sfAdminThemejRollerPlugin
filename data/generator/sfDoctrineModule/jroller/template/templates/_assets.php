@@ -34,3 +34,6 @@
 <?php if (sfConfig::get('app_sf_admin_theme_jroller_plugin_theme_switcher')): // use theme switcher ?>
   [?php use_javascript('<?php echo sfConfig::get('app_sf_admin_theme_jroller_plugin_web_dir', '/sfAdminThemejRollerPlugin').'/js/themeswitcher.js' ?>') ?]
 <?php endif; ?>
+
+
+  [?php use_javascript('<?php echo sfConfig::get('app_sf_admin_theme_jroller_plugin_web_dir', '/sfAdminThemejRollerPlugin').'/js/editable.jroller.js' ?>') ?]
