@@ -22,7 +22,7 @@
 
   [?php else: ?]
 
-  <table>
+  <table id="main_list">
     <caption class="fg-toolbar ui-widget-header ui-corner-top">
       <?php if ($this->configuration->hasFilterForm()): ?>
       <div id="sf_admin_filters_buttons" class="fg-buttonset fg-buttonset-multi ui-state-default">
@@ -60,7 +60,17 @@
 
     <tbody>
       [?php foreach ($pager->getResults() as $i => $<?php echo $this->getSingularName() ?>): $odd = fmod(++$i, 2) ? ' odd' : '' ?]
-        <tr class="sf_admin_row ui-widget-content [?php echo $odd ?]">
+        <tr id="node-[?php echo $<?php echo $this->getSingularName() ?>['id']; ?]" class="sf_admin_row ui-widget-content [?php echo $odd ?]
+            <?php if ($this->configuration->isNestedSet()): ?>
+            [?php          // insert hierarchical info
+                $node = $<?php echo $this->getSingularName() ?>->getNode();
+                if ($node->isValidNode() && $node->hasParent())
+                {
+                    echo " child-of-node-".$node->getParent()->getId();
+                }
+            ?]
+            <?php endif; ?>
+            ">
           <?php if ($this->configuration->getValue('list.batch_actions')): ?>
             [?php include_partial('<?php echo $this->getModuleName() ?>/list_td_batch_actions', array('<?php echo $this->getSingularName() ?>' => $<?php echo $this->getSingularName() ?>, 'helper' => $helper)) ?]
           <?php endif; ?>
@@ -84,5 +94,57 @@ function checkAll()
 {
   var boxes = document.getElementsByTagName('input'); for(var index = 0; index < boxes.length; index++) { box = boxes[index]; if (box.type == 'checkbox' && box.className == 'sf_admin_batch_checkbox') box.checked = document.getElementById('sf_admin_list_batch_checkbox').checked } return true;
 }
+<?php if ($this->configuration->isNestedSet()): ?>
+    
+$(document).ready(function(){
+  $("#main_list").treeTable({
+    treeColumn: 1,
+    initialState: 'expanded'
+  });
+});
+
+ // Configure draggable nodes
+$("#main_list .jroller-drag").draggable({
+        helper: "clone",
+        opacity: .75,
+        refreshPositions: true, // Performance?
+        revert: "invalid",
+        revertDuration: 300,
+        scroll: true
+    });
+
+// Configure droppable rows
+$("#main_list .jroller-drag").each(function() {
+    $(this).parents("tr").droppable({
+        accept: ".jroller-drag",
+        drop: function(e, ui) {
+            // Call jQuery treeTable plugin to move the branch
+            var parentTr    = $($(ui.draggable).parents("tr"));
+            parentTr.appendBranchTo(this);
+            var parentId    = parentTr.attr("id");
+            var thisId      = this.id;
+            $("#select_" + parentId).val(thisId.substr(5));
+        },
+        hoverClass: "accept",
+        over: function(e, ui) {
+            // Make the droppable branch expand when a draggable node is moved over it.
+            if(this.id != ui.draggable.parents("tr")[0].id && !$(this).is(".expanded")) {
+                $(this).expand();
+            }
+        }
+    });
+});
+
+// Make visible that a row is clicked
+$("table#main_list tbody tr").mousedown(function() {
+    $("tr.selected").removeClass("selected"); // Deselect currently selected rows
+    $(this).addClass("selected");
+});
+
+// Make sure row is selected when span is clicked
+$("table#main_list tbody tr jroller-drag").mousedown(function() {
+    $($(this).parents("tr")[0]).trigger("mousedown");
+});
+<?php endif; ?>
 /* ]]> */
 </script>

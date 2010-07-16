@@ -45,6 +45,7 @@ abstract class jRollerGeneratorConfiguration extends sfModelGeneratorConfigurati
         'title'   => $this->getEditTitle(),
         'actions' => $this->getEditActions() ? $this->getEditActions() : $this->getFormActions(),
       ),
+
     );
 
     foreach (array_keys($config['default']) as $field)
@@ -70,19 +71,13 @@ abstract class jRollerGeneratorConfiguration extends sfModelGeneratorConfigurati
       ));
     }
 
-    // form actions
-    foreach (array('edit', 'new') as $context)
+    // form & list actions
+    foreach (array('edit', 'new', 'list') as $context)
     {
       foreach ($this->configuration[$context]['actions'] as $action => $parameters)
       {
         $this->configuration[$context]['actions'][$action] = $this->fixActionParameters($action, $parameters);
       }
-    }
-
-    // list actions
-    foreach ($this->configuration['list']['actions'] as $action => $parameters)
-    {
-      $this->configuration['list']['actions'][$action] = $this->fixActionParameters($action, $parameters);
     }
 
     // list batch actions
@@ -144,6 +139,7 @@ abstract class jRollerGeneratorConfiguration extends sfModelGeneratorConfigurati
     }
     $this->configuration['credentials']['create'] = $this->configuration['credentials']['new'];
     $this->configuration['credentials']['update'] = $this->configuration['credentials']['edit'];
+
   }
 
   protected function parseVariables($context, $key)

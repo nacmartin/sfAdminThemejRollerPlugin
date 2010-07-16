@@ -2,16 +2,18 @@
   {
     $request->checkCSRFProtection();
 
-    if (!$ids = $request->getParameter('ids'))
+    if (!$action = $request->getParameter('batch_action'))
     {
-      $this->getUser()->setFlash('error', 'You must at least select one item.');
+      $this->getUser()->setFlash('error', 'You must select an action to execute on the selected items.');
 
       $this->redirect('@<?php echo $this->getUrlForAction('list') ?>');
     }
 
-    if (!$action = $request->getParameter('batch_action'))
+    $ids = $request->getParameter('ids');
+    
+    if( !$ids && $action != "batchSavetreeorder" )
     {
-      $this->getUser()->setFlash('error', 'You must select an action to execute on the selected items.');
+      $this->getUser()->setFlash('error', 'You must at least select one item.');
 
       $this->redirect('@<?php echo $this->getUrlForAction('list') ?>');
     }
@@ -31,7 +33,7 @@
     try
     {
       // validate ids
-      $ids = $validator->clean($ids);
+      if($action != "batchSavetreeorder") $ids = $validator->clean($ids);
 
       // execute batch
       $this->$method($request);

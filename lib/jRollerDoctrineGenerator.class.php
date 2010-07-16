@@ -124,8 +124,7 @@ class jRollerDoctrineGenerator extends sfDoctrineGenerator
         }
         
         return sprintf("get_partial('list_field_editable', array('name' => '%s', 'module_name' => '%s', 'type' => '%s', 'new' => %s, 'field' => \$%s))",  $fieldName, $this->getModuleName(), $fieldType, $fieldListNew, $this->getSingularName());
-        //return sprintf("get_partial('list_field_editable', array('name' => '%s', 'module_name' => '%s', 'type' => '%s', 'new' => %s, 'field' => \$%s))",  'League', $this->getModuleName(), $fieldType, $fieldListNew, $this->getSingularName());
-
+       
     }
     
     if ($field->isLink())

@@ -52,7 +52,6 @@ class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorConfiguration ex
 
 <?php include dirname(__FILE__).'/filtersConfiguration.php' ?>
 <?php include dirname(__FILE__).'/paginationConfiguration.php' ?>
-
 <?php include dirname(__FILE__).'/sortingConfiguration.php' ?>
 
   public function getTableMethod()
