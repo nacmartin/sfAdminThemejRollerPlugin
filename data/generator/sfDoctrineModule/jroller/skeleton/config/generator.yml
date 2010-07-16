@@ -1,5 +1,5 @@
 generator:
-  class: sfDoctrineGenerator
+  class: jRollerDoctrineGenerator
   param:
 ##CONFIG##
     # extra: [show, print, export]
