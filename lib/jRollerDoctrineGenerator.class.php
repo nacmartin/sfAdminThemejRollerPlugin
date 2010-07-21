@@ -83,14 +83,10 @@ class jRollerDoctrineGenerator extends sfDoctrineGenerator
         }
 
         //Check if the method 'getEditableListForXXXXAsArray exist on the modelClass
-        try {
-            $methodName = 'getEditableListFor'. ucwords($field->getName()) .'AsArray';
-            $modelClass->$methodName();
-            $fieldType  = 'list';
-        }
-        catch (Exception $e) {
-            $fieldType      = null;
-        }
+         $methodName = 'getEditableListFor'. ucwords($field->getName()) .'AsArray';
+
+        if( method_exists($modelClass, $methodName) == true ) $fieldType  = 'list';
+        else                                                  $fieldType  = null;
 
         if( $fieldType == null )
         {
@@ -112,19 +108,11 @@ class jRollerDoctrineGenerator extends sfDoctrineGenerator
         //If the field is a list, we check if the new method exist
         if( $fieldType == 'list' )
         {
-            try {
-                $methodName = 'newEditableListFor'. ucwords($field->getName());
-                $modelClass->$methodName();
-                $fieldListNew   = 'true';
-            }
-            catch (Exception $e)
-            {
-                $fieldListNew   = 'false';
-            }
+            $methodName     = 'newEditableListFor'. ucwords($field->getName());
+            $fieldListNew   = method_exists($modelClass, $methodName) ? 'true': 'false';
         }
         
         return sprintf("get_partial('list_field_editable', array('name' => '%s', 'module_name' => '%s', 'type' => '%s', 'new' => %s, 'field' => \$%s))",  $fieldName, $this->getModuleName(), $fieldType, $fieldListNew, $this->getSingularName());
-       
     }
     
     if ($field->isLink())
