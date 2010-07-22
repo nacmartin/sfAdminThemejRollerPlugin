@@ -66,8 +66,9 @@
 
         $retcode = $field->$tmpMethodName( $request->getParameter('value') );
         
-        if($retcode == true) return sfView::NONE;
-        else                 return $this->forward500('Error during the '.$tmpMethodName.' method');
+        if($retcode != true) $this->getResponse()->setStatusCode(500, 'Error during the '.$tmpMethodName.' method');
+
+        return sfView::NONE;
   }
 
 <?php foreach($this->configuration->getValue('list.display') as $name => $field): ?>
