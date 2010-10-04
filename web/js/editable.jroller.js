@@ -134,14 +134,20 @@
 
              for(var i = 0; i < datas.length; i++ )
              {
+                 var classLabel     = "";
+                 var classOpt       = " dropdownOpt";
+
                  if(datas[i].label == 'yes')
                  {
-                      dropdown.append($('<div class="dropdownItem dropdownLabel" value="' + datas[i].id + '">' + datas[i].name + '</div>'));
+                     classLabel    = " dropdownLabel";
                  }
-                 else
+
+                 if(datas[i].select == 'no' || datas[i].id == 0 )
                  {
-                      dropdown.append($('<div class="dropdownItem dropdownOpt" value="' + datas[i].id + '">' + datas[i].name + '</div>'));
+                     classOpt       = "";
                  }
+
+                 dropdown.append($('<div class="dropdownItem' + classLabel + classOpt +'" value="' + datas[i].id + '">' + datas[i].name + '</div>'));
             }
 
             // on masque la zone déroulante
@@ -236,13 +242,14 @@
          params.name       = field.data('name');
 
          if(field.data('editType') == 'text')
-         {params.value   = field.html();}
+         { params.value   = field.html(); }
          else
-         {params.value   = value;}
+         { params.value   = value; }
          
          var addr          = field.data('BaseUrl') + "/" + field.data('SetUrl')
 
          $.post( addr, params, function(){field.data( 'value', params.value )});
+         //$.ajax()
     }
 
     function jrollerEditableGetList(field){
