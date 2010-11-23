@@ -84,14 +84,14 @@ jQuery().ready(function(){
 			  $(this).removeClass('ui-state-hover');
 			}
 		)
-		.click(function(e) {
-			// change row color
-			$(this).toggleClass('ui-state-highlight');
-			// change checkbox status
-			var chx = $(this).find('input:checkbox');
-			if ($(this).hasClass('ui-state-highlight')) $(chx).attr('checked','checked');
-			else $(chx).removeAttr('checked');
-		});
+		//.click(function(e) {
+		//	// change row color
+		//	$(this).toggleClass('ui-state-highlight');
+		//	// change checkbox status
+		//	var chx = $(this).find('input:checkbox');
+		//	if ($(this).hasClass('ui-state-highlight')) $(chx).attr('checked','checked');
+		//	else $(chx).removeAttr('checked');
+		//});
 
     // batch actions
     $('.sf_admin_batch_actions_choice select').selectmenu({
